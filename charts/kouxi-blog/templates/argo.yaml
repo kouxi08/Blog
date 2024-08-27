@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kouxi-blog
+spec:
+  destination:
+    namespace: sample
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: sample-app
+    repoURL: https://github.com/kouxi08/astro_blog.git
+    plugin: {}
+    targetRevision: {{ .Values.targetRevision }}
+    helm:
+      valueFiles: {}
+  project: default
+  syncPolicy:

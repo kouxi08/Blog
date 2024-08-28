@@ -2,16 +2,22 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: kouxi-blog
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
-    namespace: sample
+    namespace: argocd
     server: 'https://kubernetes.default.svc'
   source:
-    path: sample-app
+    path: charts/kouxi-blog
     repoURL: https://github.com/kouxi08/astro_blog.git
     plugin: {}
-    targetRevision: {{ .Values.targetRevision }}
-    helm:
-      valueFiles: {}
+    targetRevision: main
   project: default
   syncPolicy:
+    syncOptions:
+        - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true

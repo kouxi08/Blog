@@ -17,8 +17,8 @@ ENV USE_SSL=true
 ENV ACCESS_KEY=${accesskey}
 ENV SECRET_ACCESS_KEY=${secretkey}
 
-RUN npm install
-RUN npm run build
+RUN npm install && \
+    npm run build
 
 FROM node:20.5.0-slim as runtime
 COPY --from=base /usr/src/app/node_modules ./var/app/node_modules

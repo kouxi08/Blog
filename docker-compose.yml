@@ -7,7 +7,11 @@ services:
     container_name: astro-blog
     volumes:
       - .:/usr/src/app
+      - front_node_modules:/usr/src/app/node_modules
     ports:
       - "4321:4321"
     stdin_open: true
     tty: true
+
+volumes:
+    front_node_modules:

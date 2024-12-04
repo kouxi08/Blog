@@ -3,10 +3,12 @@ import * as Minio from 'minio'
 const minioClient = new Minio.Client({
 
   endPoint: import.meta.env.ENDPOINT,
-  useSSL: import.meta.env.USESSL === 'true',
+  useSSL: import.meta.env.USE_SSL === 'true',
   accessKey: import.meta.env.ACCESS_KEY,
   secretKey: import.meta.env.SECRET_ACCESS_KEY,
 })
+
+let count = 0;
 
 //バケット内に存在するオブジェクト名の一覧を取得する
 export const get_object_name = (): Promise<string[]> => {
@@ -36,10 +38,12 @@ export const get_data_url = async (): Promise<string[]> => {
   try {
     // objectNamesを取得
     const objectNames = await get_object_name();
-    console.log(objectNames);
+    console.log(objectNames.length);
 
     if (objectNames.length > 0) {
-      await Promise.all(objectNames.map(async (objectName) => {
+
+      const limitedObjectNames = objectNames.slice(0, 15);
+      await Promise.all(limitedObjectNames .map(async (objectName) => {
         const data_name = objectName;
         const presignedUrl = await new Promise<string>((resolve, reject) => {
           minioClient.presignedUrl(
@@ -66,4 +70,4 @@ export const get_data_url = async (): Promise<string[]> => {
   } catch (error) {
     throw error;
   }
-};
+ };

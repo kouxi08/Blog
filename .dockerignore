@@ -1,4 +1,5 @@
 .env
 node_modules
 .git
-
+Dockerfile.dev
+README.md

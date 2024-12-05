@@ -56,6 +56,7 @@ securityContext: {}
 service:
   type: ClusterIP
   port: 80
+  targetPort: 4321
 
 ingress:
   enabled: true

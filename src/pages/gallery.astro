@@ -2,8 +2,21 @@
 import BaseHead from '../components/BaseHead.astro';
 import Layout from '../layouts/mainpage_layout.astro';
 import LazyImage from '../components/LazyImage.astro'
+import { get_data_url } from '../minio';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 export const prerender = false;
+
+
+async function fetchData() {
+  try {
+    const presignedUrl = await get_data_url();
+    return presignedUrl;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+}
+const results = await fetchData();
 ---
 
 <!doctype html>
@@ -17,7 +30,17 @@ export const prerender = false;
 				<div class="spinner"></div>
 			</div>
 			<div id="imageContainer" style="display: none;">
-					<LazyImage />
+				<ul class="columns-2 md:columns-3 lg:columns-4 xl:columns-5  sm:mr-4 sm:ml-4" >
+					{results && results.length > 0 ? (
+						results.map((url, index) => (
+							<li>
+								<img src={url} alt={`Image ${index}`} width="100%" height="auto"/>
+							</li>
+						))
+						) : (
+							<p>No images available</p>
+						)}
+				</ul>
 			</div>
 		</Layout>
 		<script>

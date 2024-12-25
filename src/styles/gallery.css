@@ -1,0 +1,30 @@
+#loading {
+    width: 100vw;
+    height: 100vh;
+    transition: all 1s;
+    background-color: rgb(255, 255, 255);
+
+    position: fixed;
+    z-index: 9999;
+}
+.spinner {
+    width: 100px;
+    height: 100px;
+    margin: 200px auto;
+    background-color: #9e9d9d;
+    border-radius: 100%;
+    animation: sk-scaleout 1.0s infinite ease-in-out;
+}
+/* ローディングアニメーション */
+@keyframes sk-scaleout {
+    0% {
+        transform: scale(0);
+    } 100% {
+        transform: scale(1.0);
+        opacity: 0;
+    }
+}
+.loaded {
+    opacity: 0;
+    visibility: hidden;
+}

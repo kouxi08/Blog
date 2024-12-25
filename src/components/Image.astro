@@ -1,5 +1,6 @@
 ---
 import { get_data_url } from '../minio';
+import '../styles/image.css'
 
 export const prerender = false;
 
@@ -30,35 +31,3 @@ const results = await fetchData();
             )}
     </section>
 </div>
-
-<style>
-    #imageContainer{
-		animation: fadeIn 2s ease 0s 1 normal;
-    	-webkit-animation: fadeIn 2s ease 0s 1 normal;
-	}
-		@keyframes fadeIn {
-		0% {opacity: 0}
-		100% {opacity: 1}
-	}
-	.photos {
-		display: flex;
-		flex-flow: row wrap;
-		gap: 2px;
-		padding: 2px;
-	}
-
-	.gallery-item {
-		flex: auto;
-	}
-
-	.gallery-item img {
-		height: 380px; width: auto; min-width: 100%; object-fit: cover;
-		border-radius: 5px;
-		}
-	@media screen and (max-width: 768px) {
-		.gallery-item img {
-			width: 380px;
-			height: auto;
-		}
-	}
-</style>

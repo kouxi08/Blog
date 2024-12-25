@@ -2,10 +2,10 @@
 import BaseHead from '../components/BaseHead.astro';
 import Layout from '../layouts/mainpage_layout.astro';
 import ImageGallery from '../components/Image.astro'
-import { get_data_url } from '../minio';
+import '../styles/gallery.css'
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
-export const prerender = false;
 
+export const prerender = false;
 ---
 
 <!doctype html>
@@ -42,36 +42,3 @@ export const prerender = false;
 		</script>
 	</body>
 </html>
-
-<style>
-	#loading {
-		width: 100vw;
-		height: 100vh;
-		transition: all 1s;
-		background-color: rgb(255, 255, 255);
-
-		position: fixed;
-		z-index: 9999;
-	}
-	.spinner {
-		width: 100px;
-		height: 100px;
-		margin: 200px auto;
-		background-color: #9e9d9d;
-		border-radius: 100%;
-		animation: sk-scaleout 1.0s infinite ease-in-out;
-	}
-	/* ローディングアニメーション */
-	@keyframes sk-scaleout {
-		0% {
-			transform: scale(0);
-		} 100% {
-			transform: scale(1.0);
-			opacity: 0;
-		}
-	}
-	.loaded {
-		opacity: 0;
-		visibility: hidden;
-	}
-</style>

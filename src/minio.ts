@@ -42,8 +42,10 @@ export const get_data_url = async (): Promise<string[]> => {
 
     if (objectNames.length > 0) {
 
-      const limitedObjectNames = objectNames.slice(0, 15);
-      await Promise.all(limitedObjectNames .map(async (objectName) => {
+      // const limitedObjectNames = objectNames.slice(0, 15);
+      // await Promise.all(limitedObjectNames .map(async (objectName) => {
+        await Promise.all(objectNames.map(async (objectName) => {
+
         const data_name = objectName;
         const presignedUrl = await new Promise<string>((resolve, reject) => {
           minioClient.presignedUrl(

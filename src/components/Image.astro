@@ -1,0 +1,64 @@
+---
+import { get_data_url } from '../minio';
+
+export const prerender = false;
+
+async function fetchData() {
+  try {
+    const presignedUrl = await get_data_url();
+    return presignedUrl;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+}
+const results = await fetchData();
+
+
+---
+
+<div id="imageContainer" style="display: none;">
+    <section class="photos">
+        {results && results.length > 0 ? (
+            results.map((url, index) => (
+                <div class="gallery-item">
+                    <img src={url} alt={`Image ${index}`}  />
+                </div>
+            ))
+            ) : (
+                <p>No images available</p>
+            )}
+    </section>
+</div>
+
+<style>
+    #imageContainer{
+		animation: fadeIn 2s ease 0s 1 normal;
+    	-webkit-animation: fadeIn 2s ease 0s 1 normal;
+	}
+		@keyframes fadeIn {
+		0% {opacity: 0}
+		100% {opacity: 1}
+	}
+	.photos {
+		display: flex;
+		flex-flow: row wrap;
+		gap: 2px;
+		padding: 2px;
+	}
+
+	.gallery-item {
+		flex: auto;
+	}
+
+	.gallery-item img {
+		height: 380px; width: auto; min-width: 100%; object-fit: cover;
+		border-radius: 5px;
+		}
+	@media screen and (max-width: 768px) {
+		.gallery-item img {
+			width: 380px;
+			height: auto;
+		}
+	}
+</style>

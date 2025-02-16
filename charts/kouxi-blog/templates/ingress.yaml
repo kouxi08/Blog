@@ -24,16 +24,17 @@ spec:
     {{- end }}
   {{- end }}
   rules:
-    {{- range .Values.ingress.hosts }}
-    - host: {{ .host | quote }}
+    {{ .Values.app.ingress.hosts }}
+    {{- range $host := .Values.app.ingress.hosts }}
+    - host: {{ $host }}
       http:
         paths:
-          - path: {{ .paths.path }}
-            pathType: {{ .paths.pathType }}
+          - path: {{ .Values.ingress.path }}
+            pathType: {{ .Values.ingress.pathType }}
             backend:
               service:
                 name: {{ $fullName }}
-                port: 
-                  number: {{ $svcPort }}
-    {{- end }}
+                port:
+                  number: 80
+      {{- end }}
   {{- end }}

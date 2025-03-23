@@ -36,7 +36,7 @@ export default function GetImages ({ images }: { images:Photo[] }) {
                 }))}
             />
             {/* <SSR breakpoints={[300, 600, 900, 1200]}> */}
-                <MasonryPhotoAlbum photos={images} onClick={({ index }) => handleClick(index)} componentsProps={{ container: { style: { margin: 0 } } }}/>
+                <MasonryPhotoAlbum spacing={10} photos={images} onClick={({ index }) => handleClick(index)} defaultContainerWidth={800} skeleton={<div style={{ width: "100%", minHeight: 800 }} />}/>
             {/* </SSR> */}
         </ChakraProvider>
     )

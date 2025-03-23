@@ -18,7 +18,7 @@ export async function get_photo(image: string):Promise<Photo> {
                 height: Math.round((results.height / results.width) * breakpoint),
             }))
         }
-        // console.log("srcSet:", JSON.stringify(images.srcSet, null, 2));
+        
         return images
     }catch(error){
         throw error;

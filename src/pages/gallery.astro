@@ -1,44 +1,56 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
 import Layout from '../layouts/mainpage_layout.astro';
-import ImageGallery from '../components/Image.astro'
-import '../styles/gallery.css'
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import GetImages from '../components/react/images.js'
+import { get_data_url } from '../minio';
+import { get_photo } from '../image'
+import '../styles/gallery.css'
 
 export const prerender = false;
+
+async function processImages() {
+	const images_result = await get_data_url();
+	const results = await Promise.all(images_result.map(async (image) => {
+		const imageUrl = image.src
+
+		try {
+			const photo = await get_photo(imageUrl)
+			return photo
+		}catch(error) {
+			throw error
+		}
+	}))
+	return results
+}
+
+const results = await processImages();
+
 ---
 
-<!doctype html>
-<html lang="ja">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
+<Layout title='GALLERY'>
+	<!-- <div id="loading">
+		<div class="spinner"></div>
+	</div> -->
+	<!-- {console.log(results)} -->
+	<GetImages images={results} client:load />
+</Layout>
 
-	<body >
-		<Layout title='GALLERY'>
-			<div id="loading">
-				<div class="spinner"></div>
-			</div>
-			<ImageGallery  />
-		</Layout>
-
-		<script>
-			// 画像のロードが完了したら非表示のCSSを削除し、画像を表示する
-			window.onload = function()  {
-				const imageContainer = document.getElementById('imageContainer');
-				const loading = document.getElementById('loading');
-				if (imageContainer && loading) {
-					imageContainer.style.display = 'block';
-					loading.style.display = 'none';
-				}
-			}
-			// ローディング画面を表示する
-			document.addEventListener('DOMContentLoaded', function () {
-				const loading = document.getElementById('loading');
-				if (loading) {
-					loading.style.display = 'block';
-				}
-			});
-		</script>
-	</body>
-</html>
+<!-- <script>
+	// 画像のロードが完了したら非表示のCSSを削除し、画像を表示する
+	window.onload = function()  {
+		const imageContainer = document.getElementById('imageContainer');
+		const loading = document.getElementById('loading');
+		if (imageContainer && loading) {
+			imageContainer.style.display = 'block';
+			loading.style.display = 'none';
+		}
+	}
+	// ローディング画面を表示する
+	document.addEventListener('DOMContentLoaded', function () {
+		const loading = document.getElementById('loading');
+		if (loading) {
+			loading.style.display = 'block';
+		}
+	});
+</script> 

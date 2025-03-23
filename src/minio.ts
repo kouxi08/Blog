@@ -1,5 +1,10 @@
 import * as Minio from 'minio'
 
+type Images =  {
+  src: string
+  alt: string
+}
+
 const minioClient = new Minio.Client({
 
   endPoint: import.meta.env.ENDPOINT,
@@ -7,8 +12,6 @@ const minioClient = new Minio.Client({
   accessKey: import.meta.env.ACCESS_KEY,
   secretKey: import.meta.env.SECRET_ACCESS_KEY,
 })
-
-let count = 0;
 
 //バケット内に存在するオブジェクト名の一覧を取得する
 export const get_object_name = (): Promise<string[]> => {
@@ -33,12 +36,12 @@ export const get_object_name = (): Promise<string[]> => {
 };
 
 //バケット内のオブジェクトにアクセスするためのURLを発行する
-export const get_data_url = async (): Promise<string[]> => {
-  var urls: string[] = [];
+export const get_data_url = async (): Promise<Images[]> => {
+  var photos: Images[] = [];
   try {
     // objectNamesを取得
     const objectNames = await get_object_name();
-    console.log(objectNames.length);
+    // console.log(objectNames.length);
 
     if (objectNames.length > 0) {
 
@@ -63,9 +66,14 @@ export const get_data_url = async (): Promise<string[]> => {
             },
           );
         });
-        urls.push(presignedUrl);
+        const images: Images = {
+          src: presignedUrl,
+          alt: objectName,
+        };
+        photos.push(images);
       }));
-      return urls;
+      return photos;
+
     } else {
       throw new Error('No object names available.');
     }

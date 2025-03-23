@@ -2,6 +2,16 @@ apiVersion: v1
 entries:
   kouxi-blog:
   - apiVersion: v2
+    appVersion: 1.0.1
+    created: "2025-03-23T13:50:50.740421995Z"
+    description: A Helm chart for Kubernetes
+    digest: 22271ef999db639bed541805e38a40c27292f567d0781780c1fbf4d44e68bc6a
+    name: kouxi-blog
+    type: application
+    urls:
+    - https://github.com/kouxi08/Blog/releases/download/kouxi-blog-0.2.1/kouxi-blog-0.2.1.tgz
+    version: 0.2.1
+  - apiVersion: v2
     appVersion: 1.0.0
     created: "2025-03-23T13:41:31.962194453Z"
     description: A Helm chart for Kubernetes
@@ -101,4 +111,4 @@ entries:
     urls:
     - https://github.com/kouxi08/astro_blog/releases/download/kouxi-blog-0.1.1/kouxi-blog-0.1.1.tgz
     version: 0.1.1
-generated: "2025-03-23T13:41:31.962242163Z"
+generated: "2025-03-23T13:50:50.74047816Z"

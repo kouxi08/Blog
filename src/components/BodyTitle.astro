@@ -1,56 +1,10 @@
 ---
 import '@fontsource/gfs-didot'
+import '../styles/title.css'
 interface Props {
     text : string
 }
 const {text} = Astro.props;
 ---
 
-<p> {text} </p>
-
-<style>
-    p {
-      font-family: "GFS Didot";
-      font-size: 1.25rem; /* equivalent to text-xl */
-      display: flex; /* equivalent to flex */
-      align-items: center; /* equivalent to items-center */
-      justify-content: center; /* equivalent to justify-center */
-      margin-bottom: 5rem; /* equivalent to mb-20 */
-      margin-top: 4rem; /* equivalent to mt-16 */
-      color: #8F8F8F; /* equivalent to text-gray-500 */
-      letter-spacing: 10px;
-    }
-    p::before,
-    p::after {
-      content: "";
-      width: 20rem;
-      height: 1px;
-      background: rgb(184, 184, 184);
-      display: inline-block;
-    }
-
-    p::before {
-      margin-right: 25px;
-    }
-
-    p::after {
-      margin-left: 20px;
-    }
-      @media (max-width: 680px) {
-        p {
-        font-size: 1rem; /* equivalent to text-xl */
-        display: flex; /* equivalent to flex */
-        align-items: center; /* equivalent to items-center */
-        justify-content: center; /* equivalent to justify-center */
-        margin-bottom: 2rem; /* equivalent to mb-20 */
-        margin-top: 2rem; /* equivalent to mt-16 */
-        color: #8F8F8F; /* equivalent to text-gray-500 */
-        letter-spacing: 10px;
-      }
-      p::before,
-      p::after {
-        display:none;
-    }
-
-    }
-</style>
+<p class="title"> {text} </p>

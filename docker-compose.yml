@@ -1,15 +1,16 @@
 version: '3.9'
 services:
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile.dev
+    image: kouxi00/astro-blog:1.0.1
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile.dev
     container_name: astro-blog
     env_file:
       - ./env.list
-    volumes:
-      - .:/usr/src/app
-      - front_node_modules:/usr/src/app/node_modules
+    # volumes:
+    #   - .:/usr/src/app
+    #   - front_node_modules:/usr/src/app/node_modules
     ports:
       - "4321:4321"
     stdin_open: true

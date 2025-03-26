@@ -1,31 +1,12 @@
 ---
 import '@fontsource/gfs-didot'
+import '../styles/footer.css'
 
 const today = new Date();
 ---
-<section>
-	<div/>
+<section class="footer-section">
+	<div class="underline"/>
 	<footer>
 		&copy; {today.getFullYear()} kouxi photo.
 	</footer>
 </section>
-
-<style>
-	section {
-		font-family: "GFS Didot";font-size: 22px;
-		color: #8F8F8F; /* equivalent to text-gray-500 */
-		margin-top: 3.5rem
-	}
-	div {
-		border-bottom: 1px solid #e5e7eb; /* equivalent to border-b border-gray-300 */
-		width: 100%; /* equivalent to w-full */
-		position: absolute; /* equivalent to absolute */
-	}
-	footer {
-		font-size: 15px;
-		padding: 2em 1em 2em 1em;
-		background: linear-gradient(var(--gray-gradient)) no-repeat;
-		color: rgb(var(--gray));
-		text-align: center;
-	}
-</style>

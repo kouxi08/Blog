@@ -1,0 +1,27 @@
+---
+import GetImages from '../components/react/images.js'
+import { get_data_url } from '../minio';
+import { get_photo } from '../image'
+
+
+async function processImages() {
+	const images_result = await get_data_url();
+	// console.log(images_result)
+	const results = await Promise.all(images_result.map(async (image) => {
+		const imageUrl = image.src
+
+		try {
+			const photo = await get_photo(imageUrl)
+			return photo
+		}catch(error) {
+			throw error
+		}
+	}))
+	return results
+}
+
+const results = await processImages();
+// console.log(results)
+---
+
+<GetImages images={results} client:only>

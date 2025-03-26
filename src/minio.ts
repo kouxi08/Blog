@@ -8,7 +8,7 @@ type Images =  {
 const minioClient = new Minio.Client({
 
   endPoint: import.meta.env.ENDPOINT,
-  useSSL: import.meta.env.USE_SSL === 'true',
+  useSSL: true,
   accessKey: import.meta.env.ACCESS_KEY,
   secretKey: import.meta.env.SECRET_ACCESS_KEY,
 })
@@ -39,14 +39,10 @@ export const get_object_name = (): Promise<string[]> => {
 export const get_data_url = async (): Promise<Images[]> => {
   var photos: Images[] = [];
   try {
-    // objectNamesを取得
     const objectNames = await get_object_name();
-    // console.log(objectNames.length);
 
     if (objectNames.length > 0) {
 
-      // const limitedObjectNames = objectNames.slice(0, 15);
-      // await Promise.all(limitedObjectNames .map(async (objectName) => {
         await Promise.all(objectNames.map(async (objectName) => {
 
         const data_name = objectName;

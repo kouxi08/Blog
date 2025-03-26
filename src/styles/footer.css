@@ -1,0 +1,17 @@
+.footer-section {
+    font-family: "GFS Didot";font-size: 22px;
+    color: #8F8F8F; /* equivalent to text-gray-500 */
+    margin-top: 3.5rem
+}
+.underline {
+    border-bottom: 1px solid #e5e7eb; /* equivalent to border-b border-gray-300 */
+    width: 100%; /* equivalent to w-full */
+    position: absolute; /* equivalent to absolute */
+}
+footer {
+    font-size: 15px;
+    padding: 2em 1em 2em 1em;
+    background: linear-gradient(var(--gray-gradient)) no-repeat;
+    color: rgb(var(--gray));
+    text-align: center;
+}

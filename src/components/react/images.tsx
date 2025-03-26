@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { ChakraProvider, defaultSystem, Skeleton } from "@chakra-ui/react"
-import  Lightbox  from "yet-another-react-lightbox";
+import { Lightbox } from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import { MasonryPhotoAlbum} from "react-photo-album";
+import { UnstableSSR as SSR } from "react-photo-album/ssr";
 import "react-photo-album/masonry.css";
 import type { Photo } from "react-photo-album";
+import { UnstableServerPhotoAlbum as ServerPhotoAlbum } from "react-photo-album/server";
 
 
 type Images = {
@@ -12,9 +13,12 @@ type Images = {
     alt?: string;
   };
 
-export default function GetImages ({ images }: { images:Photo[] }) {
+  function Loading() {
+    return <h2>🌀 Loading...</h2>;
+  }
+  
 
-    const [loadedImages, setLoadedImages] = useState({});
+export default function GetImages ({ images }: { images:Photo[] }) {
     const [isOpen, setIsOpen] = useState(false);
     const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -23,10 +27,9 @@ export default function GetImages ({ images }: { images:Photo[] }) {
         setIsOpen(true);
         console.log(setIsOpen)
     };
-
     return (
-        <ChakraProvider value= {defaultSystem}>
-             <Lightbox
+        <>
+            <Lightbox
                 open={isOpen}
                 index={currentIndex}
                 close={() => setIsOpen(false)}
@@ -35,9 +38,8 @@ export default function GetImages ({ images }: { images:Photo[] }) {
                     alt: "image",
                 }))}
             />
-            {/* <SSR breakpoints={[300, 600, 900, 1200]}> */}
-                <MasonryPhotoAlbum spacing={10} photos={images} onClick={({ index }) => handleClick(index)} defaultContainerWidth={800} skeleton={<div style={{ width: "100%", minHeight: 800 }} />}/>
-            {/* </SSR> */}
-        </ChakraProvider>
+                <MasonryPhotoAlbum spacing={5} photos={images} onClick={({ index }) => handleClick(index)}  componentsProps={(containerWidth) => ({image: { loading: (containerWidth || 0) > 600 ? "eager" : "lazy" },})}/>
+                {/* <ServerPhotoAlbum layout="masonry"  breakpoints={[300, 600, 900]} photos={images} /> */}
+        </>
     )
 }

@@ -10,7 +10,7 @@ body {
 	font-size: 20px;
 	line-height: 1.7;
 }
-
+/* 
 h1,
 h2,
 h3,
@@ -91,7 +91,7 @@ hr {
 	main {
 		padding: 1em;
 	}
-}
+} */
 
 .sr-only {
 	border: 0;

@@ -1,0 +1,44 @@
+.title {
+    font-family: "GFS Didot";
+    font-size: 1.25rem; /* equivalent to text-xl */
+    display: flex; /* equivalent to flex */
+    align-items: center; /* equivalent to items-center */
+    justify-content: center; /* equivalent to justify-center */
+    margin-bottom: 5rem; /* equivalent to mb-20 */
+    margin-top: 4rem; /* equivalent to mt-16 */
+    color: #8F8F8F; /* equivalent to text-gray-500 */
+    letter-spacing: 10px;
+  }
+  .title::before,
+  .title::after {
+    content: "";
+    width: 20rem;
+    height: 1px;
+    background: rgb(184, 184, 184);
+    display: inline-block;
+  }
+
+  .title::before {
+    margin-right: 25px;
+  }
+
+  .title::after {
+    margin-left: 20px;
+  }
+    @media (max-width: 680px) {
+    .title  {
+      font-size: 1rem; /* equivalent to text-xl */
+      display: flex; /* equivalent to flex */
+      align-items: center; /* equivalent to items-center */
+      justify-content: center; /* equivalent to justify-center */
+      margin-bottom: 2rem; /* equivalent to mb-20 */
+      margin-top: 2rem; /* equivalent to mt-16 */
+      color: #8F8F8F; /* equivalent to text-gray-500 */
+      letter-spacing: 10px;
+    }
+    .title::before,
+    .title::after {
+      display:none;
+  }
+
+  }
